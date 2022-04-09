@@ -1,22 +1,20 @@
 package com.goosemagnet.usersservice.config;
 
 import com.github.javafaker.Faker;
-import com.goosemagnet.usersservice.dao.UserDao;
 import com.goosemagnet.usersservice.model.User;
 import com.goosemagnet.usersservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 @Configuration
 @Slf4j
 public class Seed {
 
+    private static final String NO_AVATAR = "/no-avatar.png";
     private final UserService service;
 
     @Autowired
@@ -34,7 +32,6 @@ public class Seed {
                     email,
                     email.split("@")[0],
                     faker.internet().password(8, 256),
-                    faker.date().past(4380, TimeUnit.DAYS).toInstant(),
                     faker.avatar().image()
             );
             log.info("{}", user);
@@ -43,6 +40,6 @@ public class Seed {
 
         service.delete(101);
 
-        service.update(new User(1L, "goose@email.com", "goose", "password", null, "/noavatar"));
+        service.update(new User(1L, "goose@email.com", "goose", "password", NO_AVATAR));
     }
 }
