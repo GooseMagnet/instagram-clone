@@ -23,7 +23,11 @@ public class User {
 
     String avatarPath;
 
-    public User(String email, String username, String password, Instant dateCreated, String avatarPath) {
-        this(null, email, username, password, dateCreated, avatarPath);
+    public User(String email, String username, String password, String avatarPath) {
+        this(null, email, username, password, null, avatarPath);
+    }
+
+    public User(Long id, String email, String username, String password, String avatarPath) {
+        this(id, email, username, password, null, avatarPath);
     }
 }
