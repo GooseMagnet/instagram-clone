@@ -36,6 +36,7 @@ dependencies {
 
     // Cloud
     implementation 'org.springframework.cloud:spring-cloud-starter-zookeeper-discovery'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 tasks.named('test') {
