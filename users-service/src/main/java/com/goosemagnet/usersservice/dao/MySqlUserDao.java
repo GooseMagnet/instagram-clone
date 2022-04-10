@@ -13,10 +13,13 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
 public class MySqlUserDao implements UserDao {
+
+    public static final String NO_AVATAR = "no-avatar.png";
 
     private static final String SELECT_ALL = "SELECT * FROM user";
     private static final String SELECT_BY_ID = "SELECT * FROM user WHERE id = ?";
@@ -51,7 +54,8 @@ public class MySqlUserDao implements UserDao {
 
     @Override
     public void create(User user) {
-        jdbcTemplate.update(INSERT, user.getEmail(), user.getUsername(), user.getPassword(), user.getAvatarPath());
+        String avatarPath = Objects.isNull(user.getAvatarPath()) ? NO_AVATAR : user.getAvatarPath();
+        jdbcTemplate.update(INSERT, user.getEmail(), user.getUsername(), user.getPassword(), avatarPath);
     }
 
     @Override
