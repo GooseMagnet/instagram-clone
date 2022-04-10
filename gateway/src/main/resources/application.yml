@@ -4,6 +4,10 @@ spring:
   application:
     name: gateway
   cloud:
+    loadbalancer:
+      enabled: true
+    discovery:
+      enabled: true
     gateway:
       routes:
         - id: content-service
