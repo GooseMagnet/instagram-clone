@@ -27,9 +27,9 @@ public class UserDto {
     public UserDto(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
-        this.username = user.getEmail();
+        this.username = user.getUsername();
         this.password = user.getPassword();
         this.dateCreated = user.getDateCreated();
-        this.avatarPath = user.getEmail();
+        this.avatarPath = user.getAvatarPath();
     }
 }
