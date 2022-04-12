@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -25,10 +27,11 @@ public class UserController {
         return userService.getUsers(pageable).map(UserDto::new);
     }
 
-    @GetMapping("/{id}")
-    public User findUserById(@PathVariable("id") long id) {
-        return userService.findUserById(id)
-                .orElseThrow(() -> new NotFoundException("User not found with id " + id));
+    @GetMapping("/{usernameOrId}")
+    public User findUserById(@PathVariable("usernameOrId") String usernameOrId) {
+        return userService.findUserByEmail(usernameOrId)
+                .or(() -> parseInt(usernameOrId).flatMap(userService::findUserById))
+                .orElseThrow(() -> new NotFoundException("User [" + usernameOrId + "] not found"));
     }
 
     @PostMapping
@@ -57,5 +60,13 @@ public class UserController {
                 userDto.getDateCreated(),
                 userDto.getAvatarPath()
         );
+    }
+
+    private Optional<Long> parseInt(String userId) {
+        try {
+            return Optional.of(Long.parseLong(userId));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
     }
 }

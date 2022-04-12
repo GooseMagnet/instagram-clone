@@ -38,6 +38,11 @@ public class UserServiceImpl implements com.goosemagnet.usersservice.service.Use
     }
 
     @Override
+    public Optional<User> findUserByUsername(String username) {
+        return userDao.findUserByUsername(username);
+    }
+
+    @Override
     public Optional<User> findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }

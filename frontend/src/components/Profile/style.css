@@ -1,0 +1,94 @@
+.profile {
+  font-size: 20px;
+  font-weight: 100;
+  line-height: 32px;
+}
+
+.profile > header {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 15%;
+  padding-inline: 100px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.profile > header > img {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  outline: 3px solid rgba(255, 0, 0, 0.575);
+  outline-offset: 5px;
+}
+
+.profile button {
+  background-color: transparent;
+  border: 1px solid #dbdbdb;
+  font-size: 14px;
+  padding: 6px 9px;
+  cursor: pointer;
+  line-height: 18px;
+  border-radius: 4px;
+}
+
+.profile__info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile__info > div {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 2%;
+}
+
+.profile__info > ul {
+  display: flex;
+  justify-content: left;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: "serif";
+  gap: 4%;
+}
+
+.profile__info__description {
+  display: flex;
+  justify-content: left;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: "serif";
+}
+
+.filters {
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+}
+
+.filters li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 8px;
+  letter-spacing: 1px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.selected {
+  color: rgba(0, 0, 0, 1) !important;
+  font-weight: 900;
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 3%;
+}

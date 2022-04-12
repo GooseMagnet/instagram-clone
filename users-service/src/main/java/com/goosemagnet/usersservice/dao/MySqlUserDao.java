@@ -23,6 +23,7 @@ public class MySqlUserDao implements UserDao {
 
     private static final String SELECT_ALL = "SELECT * FROM user";
     private static final String SELECT_BY_ID = "SELECT * FROM user WHERE id = ?";
+    private static final String SELECT_BY_USERNAME = "SELECT * FROM user WHERE username = ?";
     private static final String SELECT_BY_EMAIL = "SELECT * FROM user WHERE email = ?";
     private static final String INSERT = "INSERT INTO user (`email`, `username`, `password`, `avatar_path`) VALUES (?, ?, ?, ?)";
     private static final String DELETE = "DELETE FROM user WHERE id = ?";
@@ -45,6 +46,11 @@ public class MySqlUserDao implements UserDao {
     @Override
     public Optional<User> findUserById(long id) {
         return jdbcTemplate.query(SELECT_BY_ID, new UserMapper(), id).stream().findFirst();
+    }
+
+    @Override
+    public Optional<User> findUserByUsername(String username) {
+        return jdbcTemplate.query(SELECT_BY_USERNAME , new UserMapper(), username).stream().findFirst();
     }
 
     @Override

@@ -12,6 +12,8 @@ public interface UserService {
 
     Optional<User> findUserById(long id);
 
+    Optional<User> findUserByUsername(String username);
+
     Optional<User> findUserByEmail(String email);
 
     Optional<User> create(User user);
