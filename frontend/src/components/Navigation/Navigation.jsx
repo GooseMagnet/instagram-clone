@@ -6,13 +6,14 @@ import {
 import { IoPaperPlaneOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoSearchOutline, IoPersonCircle } from "react-icons/io5";
+
 import "./style.css";
 
 const Navigation = () => {
   return (
     <nav className="navigation">
       <div>
-        <img src="wordmark-sharp.png" alt="instagram" />
+        <img src="/wordmark-sharp.png" alt="instagram" />
         <div className="navigation__search">
           <IoSearchOutline size={20} />
           <input type="text" placeholder="Search" />
