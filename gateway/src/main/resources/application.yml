@@ -10,14 +10,18 @@ spring:
       enabled: true
     gateway:
       routes:
-        - id: content-service
-          uri: lb://content-service
+        - id: post-service
+          uri: lb://post-service
           predicates:
-            - Path=/users/*/contents
-        - id: users-service
-          uri: lb://users-service
+            - Path=/users/*/posts,/posts/*
+        - id: user-service
+          uri: lb://user-service
           predicates:
-            - Path=/users,/users/**
+            - Path=/users,/users/*
+        - id: social-service
+          uri: lb://social-service
+          predicates:
+            - Path=/likes/*,/posts/*/comments,/users/*/following,/users/*/followers,/comments/*,/posts/*/comments/*
       globalcors:
         cors-configurations:
           '[/**]':

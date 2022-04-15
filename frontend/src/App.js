@@ -1,32 +1,59 @@
 import { Routes, Route, Outlet } from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { Suspense } from "react";
+
+import Post from "./components/Post/Post";
 import Profile from "./components/Profile/Profile";
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
 import Navigation from "./components/Navigation/Navigation";
+import { PuffLoader } from "react-spinners";
 
-const App = () => (
-  <Routes>
-    <Route path="/login" element={<Login />} />
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
 
-    <Route path="/" element={<Main />}>
-      <Route exact path="/" element={<Home />} />
-      <Route path="/:username" element={<Profile />} />
-    </Route>
-  </Routes>
-);
+const App = () => {
+
+
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Main />}>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/:username" element={<Profile />} />
+          <Route path="/posts/:postId" element={<Post />} />
+        </Route>
+      </Routes>
+    </QueryClientProvider>
+  );
+};
 
 const Main = () => (
   <>
-    <Navigation />
-    <main className="main">
-      <div>
-        <Outlet />
-      </div>
-    </main>
+    <Suspense
+      fallback={
+        <div className="loader">
+          <PuffLoader color="#0095f6" />
+        </div>
+      }
+    >
+      <Navigation />
+      <main className="main">
+        <div>
+          <Outlet />
+        </div>
+      </main>
+    </Suspense>
   </>
 );
 
 const Home = () => {
-  // Fetch photos from all this user follows, sorted chronologically
   return <h1>Home</h1>;
 };
 
