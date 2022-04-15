@@ -1,0 +1,140 @@
+.post {
+  display: flex;
+  height: 600px;
+}
+
+.post section {
+  padding-inline: 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid #efefef;
+}
+
+.text {
+  background-color: white;
+  width: 35%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  border: 1px solid #dbdbdb;
+}
+
+.comments {
+  height: 65%;
+  overflow: scroll;
+}
+
+.comments::-webkit-scrollbar {
+  display: none;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+}
+
+.media > img {
+  object-fit: cover;
+  width: 600px;
+  height: 600px;
+}
+
+.poster {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.text img {
+  height: 100%;
+  width: 32px;
+  border-radius: 100%;
+}
+
+.post a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0095f6;
+}
+
+.post span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.poster > div {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 3%;
+}
+
+.comment {
+  padding-block: 16px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.comment img {
+  height: 32px;
+}
+
+.comment__text {
+  display: flex;
+  justify-content: left;
+  margin-left: 8px;
+  font-size: 0.8em;
+}
+
+.comment__text p {
+  word-break: normal;
+  white-space: normal;
+  text-align: left;
+}
+
+.actions {
+  width: 100%;
+}
+
+.actions__icons > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.actions__icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.add-comment {
+  width: 100%;
+}
+
+.add-comment > form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-comment > form > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-comment input {
+  font-size: 0.9em;
+  margin-left: 16px;
+  outline: none;
+  border: none;
+}
+
+.add-comment button {
+  background-color: transparent;
+  border: none;
+}

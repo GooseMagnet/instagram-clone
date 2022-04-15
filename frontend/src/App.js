@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Outlet } from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { Suspense } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Post from "./components/Post/Post";
+import Profile from "./components/Profile/Profile";
+import Login from "./components/Login/Login";
+import Navigation from "./components/Navigation/Navigation";
+import { PuffLoader } from "react-spinners";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Main />}>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/:username" element={<Profile />} />
+        <Route path="/posts/:postId" element={<Post />} />
+      </Route>
+    </Routes>
+  </QueryClientProvider>
+);
+
+const Main = () => (
+  <>
+    <Suspense
+      fallback={
+        <div className="loader">
+          <PuffLoader color="#0095f6"/>
+        </div>
+      }
+    >
+      <Navigation />
+      <main className="main">
+        <div>
+          <Outlet />
+        </div>
+      </main>
+    </Suspense>
+  </>
+);
+
+const Home = () => {
+  return <h1>Home</h1>;
+};
 
 export default App;
