@@ -1,37 +1,37 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-import "./style.css";
-import {
-  BsFilePersonFill,
-  BsGrid3X3Gap,
-  BsFillPersonCheckFill,
-} from "react-icons/bs";
-import { FiPlayCircle } from "react-icons/fi";
-import { MdOutlinePersonPin, MdVerified } from "react-icons/md";
-import { BiChevronDown, BiMoviePlay } from "react-icons/bi";
-import { AiOutlinePlayCircle } from "react-icons/ai";
+import Filters from "../GridFilters/GridFilters";
+import NotFound from "../NotFound/NotFound";
 
-import pic1 from "../../assets/iOS-13-Wallpapers (1).jpeg";
-import pic2 from "../../assets/iOS-13-Wallpapers (2).jpeg";
-import pic3 from "../../assets/iOS-13-Wallpapers (3).jpeg";
-import pic4 from "../../assets/iOS-13-Wallpapers (4).jpeg";
-import pic5 from "../../assets/iOS-13-Wallpapers (5).jpeg";
-import pic6 from "../../assets/iOS-13-Wallpapers (6).jpeg";
-import pic7 from "../../assets/iOS-13-Wallpapers (7).jpeg";
-import pic8 from "../../assets/iOS-13-Wallpapers (8).jpeg";
+import { Link, useParams } from "react-router-dom";
+import { BsFillPersonCheckFill } from "react-icons/bs";
+import { MdVerified } from "react-icons/md";
+import { BiChevronDown } from "react-icons/bi";
+import { useProfile } from "../../hooks/useProfile";
+import { usePosts } from "../../hooks/usePosts";
+import { useFollowers } from "../../hooks/useFollowers";
+import { useFollowing } from "../../hooks/useFollowing";
+import { useCountPosts } from "../../hooks/useCountPosts";
+
+import "./style.css";
 
 const Profile = () => {
-  // TODO - Request for profile
-  const username = useParams().username;
+  const { username } = useParams();
 
-  const pictures = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8];
-
+  const { profile } = useProfile(username);
+  const { count } = useCountPosts(profile?.id);
+  const { followers } = useFollowers(profile?.id);
+  const { following } = useFollowing(profile?.id);
+  const { posts } = usePosts(profile?.id);
   const [activeFilter, setActiveFilter] = React.useState(0);
+
+  if (!profile) {
+    return <NotFound />;
+  }
 
   return (
     <section className="profile">
       <header>
-        <img src="johnmayer.jpg" alt="profile" />
+        <img src={profile.avatarPath} alt="profile" />
         <div className="profile__info">
           <div>
             <h2>{username}</h2>
@@ -46,61 +46,57 @@ const Profile = () => {
           </div>
           <ul>
             <li>
-              <span>1,648 posts</span>
+              <span>{count.count} posts</span>
             </li>
             <li>
-              <span>5.5m followers</span>
+              <span>{followers.count} followers</span>
             </li>
             <li>
-              <span>1,699 following</span>
+              <span>{following.count} following</span>
             </li>
           </ul>
           <div className="profile__info__description">
-            <p>Followed by johnkennmortensen, aleclehrman, tommisch +10 more</p>
+            <p>{profile.description}</p>
           </div>
         </div>
       </header>
-      <Filters filter={activeFilter} />
-      <PhotosGrid photos={pictures} />
+      {posts ? (
+        <>
+          <Filters
+            activeFilter={activeFilter}
+            onSetActiveFilter={setActiveFilter}
+          />
+          <PhotosGrid photos={posts} />
+        </>
+      ) : (
+        <PrivateProfile />
+      )}
     </section>
   );
 };
 
-const Filters = ({ filter }) => {
-  return (
-    <ul className="filters">
-      <li className={filter === 0 ? "selected" : ""}>
-        <BsGrid3X3Gap />
-        <span>POSTS</span>
-      </li>
-      <li className={filter === 1 ? "selected" : ""}>
-        <BiMoviePlay />
-        <span>REELS</span>
-      </li>
-      <li className={filter === 2 ? "selected" : ""}>
-        <AiOutlinePlayCircle />
-        <span>VIDEOS</span>
-      </li>
-      <li className={filter === 3 ? "selected" : ""}>
-        <MdOutlinePersonPin />
-        <span>TAGGED</span>
-      </li>
-    </ul>
-  );
-};
-
 const PhotosGrid = ({ photos }) => {
-  const grid = photos.map((p, i) => (
-    <img
-      key={i}
-      src={p}
-      alt={`number-${i}`}
-      width="100%"
-      className="grid__item"
-    />
-  ));
+  const grid = photos.map((p, i) => {
+    const imgPath = p.path;
+    const lastSlash = imgPath.lastIndexOf("/");
+    const extension = imgPath.lastIndexOf(".");
+    const fileId = imgPath.substring(lastSlash + 1, extension);
+
+    return (
+      <Link key={fileId} to={`/posts/${fileId}`}>
+        <img src={imgPath} alt={i} width="100%" className="grid__item" />
+      </Link>
+    );
+  });
 
   return <section className="photos">{grid}</section>;
 };
+
+const PrivateProfile = () => (
+  <section className="privateprofile">
+    <span>This Account is Private</span>
+    <span>Follow to see their photos and videos.</span>
+  </section>
+);
 
 export default Profile;

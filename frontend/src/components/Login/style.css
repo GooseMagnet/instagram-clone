@@ -1,0 +1,127 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 80vh;
+}
+
+.login__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 350px;
+  border: 1px solid #dbdbdb;
+  background-color: white;
+  padding-inline: 64px;
+  padding-top: 32px;
+  margin-bottom: 8px;
+}
+
+.login > div > img {
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.login__form > input {
+  width: 258px;
+  height: 36px;
+  border: 1px solid #dbdbdb;
+  outline: #dbdbdb;
+  padding: 8px;
+  margin: 4px;
+  background-color: #fafafa;
+  border-radius: 4px;
+}
+
+.login__button {
+  width: 258px;
+  height: 30px;
+  border: none;
+  margin: 2px;
+  background-color: #fafafa;
+  border-radius: 4px;
+  background-color: #0095f6;
+  color: white;
+  line-height: 1rem;
+  font-size: 15px;
+  margin-top: 16px;
+}
+
+.login__button:disabled {
+  background-color: rgba(00, 149, 246, 0.3);
+}
+
+.login__or {
+  font-size: 12px;
+  padding: 8px;
+  color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__or__line {
+  color: lightgrey;
+}
+
+.login__form > a {
+  margin-block: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: navy;
+}
+
+.facebook {
+  font-size: 0.9rem;
+}
+
+.forgot {
+  font-size: 0.8rem;
+}
+
+.signup {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: center;
+  padding-block: 24px !important;
+  font-size: 0.9rem;
+  gap: 4px;
+}
+
+.download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 350px;
+  padding: 16px;
+}
+
+.download img {
+  width: 136px;
+  height: 40px;
+  margin: 4px;
+}
+
+.download > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.html {
+  background: ;
+}

@@ -18,8 +18,6 @@
   height: 150px;
   width: 150px;
   border-radius: 100%;
-  outline: 3px solid rgba(255, 0, 0, 0.575);
-  outline-offset: 5px;
 }
 
 .profile button {
@@ -71,24 +69,18 @@
   gap: 10%;
 }
 
-.filters li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  padding: 8px;
-  letter-spacing: 1px;
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.selected {
-  color: rgba(0, 0, 0, 1) !important;
-  font-weight: 900;
-}
-
 .photos {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 3%;
+}
+
+.privateprofile {
+  padding: 40px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }

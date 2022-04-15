@@ -21,10 +21,14 @@
   gap: 20px;
 }
 
+.navigation a {
+  color: black;
+}
+
 .navigation__search {
   border-radius: 6px;
   background-color: rgba(239, 239, 239, 1);
-  padding: 6px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: left;
@@ -43,4 +47,10 @@
 
 .navigation__search > svg {
   color: rgba(0, 0, 0, 0.6);
+}
+
+.navigation__avatar {
+  height: 24px;
+  width: 24px;
+  border-radius: 100%;
 }
