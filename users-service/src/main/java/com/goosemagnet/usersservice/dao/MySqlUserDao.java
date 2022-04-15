@@ -25,9 +25,9 @@ public class MySqlUserDao implements UserDao {
     private static final String SELECT_BY_ID = "SELECT * FROM user WHERE id = ?";
     private static final String SELECT_BY_USERNAME = "SELECT * FROM user WHERE username = ?";
     private static final String SELECT_BY_EMAIL = "SELECT * FROM user WHERE email = ?";
-    private static final String INSERT = "INSERT INTO user (`email`, `username`, `password`, `avatar_path`) VALUES (?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO user (`email`, `username`, `password`, `avatar_path`, `isPrivate`, `description`) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String DELETE = "DELETE FROM user WHERE id = ?";
-    private static final String UPDATE = "UPDATE user SET `email` = ?, `username` = ?, `password` = ?, `avatar_path` = ? WHERE id = ?";
+    private static final String UPDATE = "UPDATE user SET `email` = ?, `username` = ?, `password` = ?, `avatar_path` = ?, `isPrivate` = ?, `description` = ? WHERE id = ?";
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -50,7 +50,7 @@ public class MySqlUserDao implements UserDao {
 
     @Override
     public Optional<User> findUserByUsername(String username) {
-        return jdbcTemplate.query(SELECT_BY_USERNAME , new UserMapper(), username).stream().findFirst();
+        return jdbcTemplate.query(SELECT_BY_USERNAME, new UserMapper(), username).stream().findFirst();
     }
 
     @Override
@@ -61,12 +61,12 @@ public class MySqlUserDao implements UserDao {
     @Override
     public void create(User user) {
         String avatarPath = Objects.isNull(user.getAvatarPath()) ? NO_AVATAR : user.getAvatarPath();
-        jdbcTemplate.update(INSERT, user.getEmail(), user.getUsername(), user.getPassword(), avatarPath);
+        jdbcTemplate.update(INSERT, user.getEmail(), user.getUsername(), user.getPassword(), avatarPath, user.getIsPrivate(), user.getDescription());
     }
 
     @Override
     public void update(User user) {
-        jdbcTemplate.update(UPDATE, user.getEmail(), user.getUsername(), user.getPassword(), user.getAvatarPath(), user.getId());
+        jdbcTemplate.update(UPDATE, user.getEmail(), user.getUsername(), user.getPassword(), user.getAvatarPath(), user.getIsPrivate(), user.getDescription(), user.getId());
     }
 
     @Override
@@ -84,7 +84,9 @@ public class MySqlUserDao implements UserDao {
                     rs.getString("username"),
                     rs.getString("password"),
                     rs.getTimestamp("date_created").toInstant(),
-                    rs.getString("avatar_path")
+                    "http://localhost:9000/instagram/" + rs.getString("avatar_path"),
+                    rs.getBoolean("isPrivate"),
+                    rs.getString("description")
             );
         }
     }

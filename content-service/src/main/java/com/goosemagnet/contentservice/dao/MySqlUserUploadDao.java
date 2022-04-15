@@ -3,6 +3,7 @@ package com.goosemagnet.contentservice.dao;
 import com.goosemagnet.contentservice.model.UserUpload;
 import com.goosemagnet.contentservice.service.MinioFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -45,13 +46,13 @@ public class MySqlUserUploadDao implements UserUploadDao {
         return jdbcTemplate.query(SELECT_BY_ID_AND_PATH, new UserUploadMapper(), userId, filepath).stream().findFirst();
     }
 
-    private static class UserUploadMapper implements RowMapper<UserUpload> {
+    public static class UserUploadMapper implements RowMapper<UserUpload> {
 
         @Override
         public UserUpload mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new UserUpload(
                     rs.getLong("user_id"),
-                    rs.getString("file_path"),
+                    "http://localhost:9000/instagram/" + rs.getString("file_path"),
                     rs.getTimestamp("date_uploaded").toInstant()
             );
         }

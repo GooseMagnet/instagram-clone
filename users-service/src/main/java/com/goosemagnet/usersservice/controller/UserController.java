@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/{usernameOrId}")
     public User findUserById(@PathVariable("usernameOrId") String usernameOrId) {
-        return userService.findUserByEmail(usernameOrId)
+        return userService.findUserByUsername(usernameOrId)
                 .or(() -> parseInt(usernameOrId).flatMap(userService::findUserById))
                 .orElseThrow(() -> new NotFoundException("User [" + usernameOrId + "] not found"));
     }
@@ -58,7 +58,9 @@ public class UserController {
                 userDto.getUsername(),
                 userDto.getPassword(),
                 userDto.getDateCreated(),
-                userDto.getAvatarPath()
+                userDto.getAvatarPath(),
+                userDto.getIsPrivate(),
+                userDto.getDescription()
         );
     }
 

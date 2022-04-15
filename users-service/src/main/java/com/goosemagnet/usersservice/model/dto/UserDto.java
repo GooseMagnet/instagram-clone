@@ -24,6 +24,10 @@ public class UserDto {
     Instant dateCreated;
     String avatarPath;
 
+    Boolean isPrivate;
+
+    String description;
+
     public UserDto(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
@@ -31,5 +35,7 @@ public class UserDto {
         this.password = user.getPassword();
         this.dateCreated = user.getDateCreated();
         this.avatarPath = user.getAvatarPath();
+        this.isPrivate = user.getIsPrivate();
+        this.description = user.getDescription();
     }
 }

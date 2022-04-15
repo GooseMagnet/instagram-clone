@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 @Configuration
@@ -41,5 +43,13 @@ public class Seed {
         service.delete(101);
 
         service.update(new User(1L, "goose@email.com", "goose", "password", NO_AVATAR));
+
+        for (int i = 1; i < 708; ++i) {
+            for (int j = 1; j < 50; ++j) {
+                if (ThreadLocalRandom.current().nextDouble(1) < 0.2) {
+
+                }
+            }
+        }
     }
 }
