@@ -1,10 +1,10 @@
 # Instagram Clone
 
 ## TODO
-- [ ] Frontend
-- [ ] Add authentication
-- [ ] Add authorization
+- [x] Frontend
+- [x] Add authentication
+- [x] Add authorization
 - [ ] Add Oauth2 (Google, Github, Facebook)
-- [ ] Dockerize all services
+- [x] Dockerize all services
 - [ ] Configure services with Kubernetes (kind)
 - [ ] Add private profiles
